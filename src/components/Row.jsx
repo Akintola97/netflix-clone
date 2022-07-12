@@ -6,7 +6,7 @@ import {MdChevronLeft, MdChevronRight} from 'react-icons/md'
 
 const image_url= "https://image.tmdb.org/t/p/original/";
 
-const Row = ({title, fetchUrl}) => {
+const Row = ({title, fetchUrl, carouselID}) => {
     const [movies, setMovies] = useState([]);
     const [trailerUrl, setTrailerUrl] =useState("");
    
@@ -19,6 +19,8 @@ const Row = ({title, fetchUrl}) => {
         }
         fetchData()
     }, [fetchUrl]);
+
+    console.log(movies)
 
     const opts = {
       height:"390",
@@ -43,34 +45,45 @@ const Row = ({title, fetchUrl}) => {
 
 
     const slideLeft = () => {
-      var slider = document.getElementById('slider');
+      var slider = document.getElementById('carousel' + carouselID);
       slider.scrollLeft = slider.scrollLeft - 500;
     };
     const slideRight = () => {
-      var slider = document.getElementById('slider');
+      var slider = document.getElementById('carousel' + carouselID);
       slider.scrollLeft = slider.scrollLeft + 500;
     };
 
     
   return (
     <>
-        <h2 className='text-white p-5'>{title}</h2>
-<div className='flex items-center p-5'>
-<MdChevronLeft onClick={slideLeft} className='bg-white absolute left-4 rounded-full'/>
-    <div className='w-ful h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
+    <h1 className='text-white p-5'>{title}</h1>
+    <div className='relative flex item-center p-4'>
    
+    <MdChevronLeft onClick={slideLeft} className='bg-white absolute bottom-[50%] left-0 opacity-50 hover:opacity-100 rounded-full'/>
+      <div id = {'carousel' + carouselID} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
+      
       {movies.map(movie => (
-        <div id = {'slider'} className='w-[43vmin] inline-block cursor-pointer p-2'>
-        <img key={movie?.id}
-        onClick = {() => handleClick(movie)}
-        className='w-full object-contain h-full mx-2 transition hover:scale-[1.08] ' src={`${image_url}${movie?.backdrop_path}`} alt={movie?.title} /> 
-        </div>
-      ) )}
+        
+        
+          <div onClick = {() => handleClick(movie)} className='w-[43vmin] h-full inline-block cursor-pointer p-2 relative'>
+            
+            <img key={movie?.id}  className='w-full h-full block mx-2 transition hover:scale-[1.08] ' src={`${image_url}${movie?.backdrop_path || movie?.poster_path}`}
+         alt={movie?.title || movie?.name ||movie?.original_name}
+         /> 
+         
+         <div className='absolute top-0 left-0 w-full h-full text-white hover:bg-black/80 opacity-0 hover:opacity-100 transition'> 
+         
+         <p className='white-space-normal text-[1.5vmin] flex items-center w-full h-full justify-center text-center absolute top-0'>
+            {movie?.title || movie?.name ||movie?.original_name}
+          </p>
+           </div>
+            </div>
+      ))}
       </div>
-      <MdChevronRight onClick={slideRight} className='bg-white absolute right-1 rounded-full' />
+      <MdChevronRight onClick={slideRight} className='bg-white absolute right-4 bottom-[50%] opacity-50 hover:opacity-100  rounded-full' />
     </div>
     {trailerUrl && <YouTube videoId={trailerUrl} opts = {opts} />}
-    </>
+ </>
   )
 }
 

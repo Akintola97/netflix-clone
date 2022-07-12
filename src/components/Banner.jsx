@@ -21,6 +21,13 @@ const Banner = () => {
         fetchData()
     }, []);
 
+    const truncateString = (str, num) => {
+        if(str?.length > num){
+            return str.slice(0, num) + '...'
+        } else 
+        return str;
+    } 
+
     const opts = {
         height:"390",
         width:"100%",
@@ -52,7 +59,7 @@ const Banner = () => {
            <div className='absolute h-full w-full bg-gradient-to-r from-black'></div>
        <img key={movies.id} className='object-cover w-[100vw] h-[100vh] block' src = {`${image_url}${movies?.backdrop_path}`} alt={`${image_url}${movies?.poster_path}`} />
     </div>
-     <div className='absolute w-[100vw] h-[100vh] top-[30%] p-4 md:p-8'>
+     <div className='absolute w-[100vw] h-[auto] top-[30%] p-4 md:p-8'>
        <h1 className='text-white font-bold text-3xl'>
            {movies?.title || movies?.name || movies?.original_name}
        </h1>
@@ -61,7 +68,7 @@ const Banner = () => {
                Released: {movies?.first_air_date}
            </p>
            <p className='w-full md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%] pt-5'>
-               {movies?.overview}
+               {truncateString(movies?.overview, 150)}
            </p>
            <div className='pt-4'>
             <button onClick = {() => handleClick(movies)} className='border bg-gray-300 text-black border-gray 300 py-2  px-5' >Play</button>
