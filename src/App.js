@@ -2,11 +2,13 @@ import Banner from "./components/Banner";
 import LoginPage from "./components/LoginPage";
 import Nav from "./components/Nav";
 import Row from "./components/Row";
+import { AuthContextProvider } from "./context/AuthContext";
 import requests from './requests'
 
 function App() {
   return (
     <div className="App">
+      <AuthContextProvider>
       <Nav />
       <Banner />
       <Row title='NETFLIX ORIGINALS' fetchUrl={requests.fetchNetflixOriginals} carouselID ='1'/>
@@ -17,6 +19,7 @@ function App() {
       <Row title='Horror' fetchUrl={requests.fetchHorrorMovies} carouselID ='6'/>
       <Row title='Romance' fetchUrl={requests.fetchRomanceMovies} carouselID ='7'/>
       <LoginPage />
+      </AuthContextProvider>
     </div>
   );
 }
