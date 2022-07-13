@@ -57,9 +57,9 @@ const Row = ({title, fetchUrl, carouselID}) => {
   return (
     <>
     <h1 className='text-white p-5'>{title}</h1>
-    <div className='relative flex item-center p-4'>
+    <div className='relative flex item-center p-4 group'>
    
-    <MdChevronLeft onClick={slideLeft} className='bg-white absolute bottom-[50%] left-0 opacity-50 hover:opacity-100 rounded-full'/>
+    <MdChevronLeft onClick={slideLeft} className='bg-white absolute bottom-[50%] left-0 opacity-50 hover:opacity-100 group-hover:block hidden rounded-full'/>
       <div id = {'carousel' + carouselID} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
       
       {movies.map(movie => (
@@ -80,7 +80,7 @@ const Row = ({title, fetchUrl, carouselID}) => {
             </div>
       ))}
       </div>
-      <MdChevronRight onClick={slideRight} className='bg-white absolute right-4 bottom-[50%] opacity-50 hover:opacity-100  rounded-full' />
+      <MdChevronRight onClick={slideRight} className='bg-white absolute right-4 bottom-[50%] opacity-50 hover:opacity-100 group-hover:block hidden   rounded-full' />
     </div>
     {trailerUrl && <YouTube videoId={trailerUrl} opts = {opts} />}
  </>
