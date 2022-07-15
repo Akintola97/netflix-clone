@@ -1,8 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
+import React, {useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserAuth } from '../context/AuthContext'
 
 const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // eslint-disable-next-line
+  const { user, logIn } = UserAuth();
+  const [error, setError] = useState('');
+  const navigate = useNavigate()
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await logIn(email, password);
+      setError('')
+      navigate('/')
+    } catch (error) {
+      console.log(error);
+      setError(error.message)
+    }
+  };
   return (
     <div>
          <div className='w-full h-screen'>
@@ -12,9 +32,13 @@ const LoginPage = () => {
     <div className='max-w-[60vmin] h-[80vmin] mx-auto bg-black opacity-[.95] text-white'>
       <div className='max-w-[55vmin] mx-auto py-16'>
         <h2 className='text-3xl font-bold'>Sign In</h2>
-        <form className='w-full flex flex-col py-4'>
-          <input className='p-3 my-2 bg-gray-700 rounded' type='email' placeholder='Email...' autoComplete='email'/>
-          <input className='p-3 my-2 bg-gray-700 rounded' type='password' placeholder='Password' autoComplete='current-password' />
+        {error ? <p className='bg-red-600 py-1 my-4 text-gray-200 text-center'>{error}</p> : null}
+        <form onSubmit={handleSubmit}
+        className='w-full flex flex-col py-4'>
+          <input onChange={(e)=> setEmail(e.target.value)}
+           className='p-3 my-2 bg-gray-700 rounded' type='email' placeholder='Email...' autoComplete='email'/>
+          <input onChange={(e)=> setPassword(e.target.value)}
+          className='p-3 my-2 bg-gray-700 rounded' type='password' placeholder='Password' autoComplete='current-password' />
         <button className='bg-red-600 py-3 my-6 rounded font-bold'>Sign In</button>
    <div className='flex justify-between items-center text-sm text-gray-600'>
      <p><input className='mr-2' type='checkbox'></input>Remember Me</p>
