@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import YouTube from 'react-youtube';
 import axios from '../axios'
 import {MdChevronLeft, MdChevronRight} from 'react-icons/md'
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 const image_url= "https://image.tmdb.org/t/p/original/";
 
@@ -75,6 +76,10 @@ const Row = ({title, fetchUrl, carouselID}) => {
          
          <p className='white-space-normal text-[1.5vmin] flex items-center w-full h-full justify-center text-center absolute top-0'>
             {movie?.title || movie?.name ||movie?.original_name}
+          </p>
+          <p>
+            <FaHeart className='absolute top-4 left-4 text-gray-300'/>
+            <FaRegHeart className='absolute top-4 left-4 text-gray-300'/>
           </p>
            </div>
             </div>

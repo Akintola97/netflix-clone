@@ -1,25 +1,28 @@
-import Banner from "./components/Banner";
-import LoginPage from "./components/LoginPage";
-import Nav from "./components/Nav";
-import Row from "./components/Row";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
 import { AuthContextProvider } from "./context/AuthContext";
-import requests from './requests'
+import LoginPage from './components/LoginPage'
+import SignUp from "./components/SignUp";
+import Account from './components/Account';
+import Nav from "./components/Nav";
+
+
 
 function App() {
   return (
     <div className="App">
-      <AuthContextProvider>
+      <BrowserRouter>
+     <AuthContextProvider>
       <Nav />
-      <Banner />
-      <Row title='NETFLIX ORIGINALS' fetchUrl={requests.fetchNetflixOriginals} carouselID ='1'/>
-      <Row title='Trending Now' fetchUrl={requests.fetchTrending} carouselID ='2'/>
-      <Row title='Top Rated' fetchUrl={requests.fetchTopRated} carouselID ='3'/>
-      <Row title='Action' fetchUrl={requests.fetchActionMovies} carouselID ='4'/>
-      <Row title='Comedy' fetchUrl={requests.fetchComedyMovies} carouselID ='5'/>
-      <Row title='Horror' fetchUrl={requests.fetchHorrorMovies} carouselID ='6'/>
-      <Row title='Romance' fetchUrl={requests.fetchRomanceMovies} carouselID ='7'/>
-      <LoginPage />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/Login' element={<LoginPage />} />
+        <Route path='/SignUp' element={<SignUp />} />
+        <Route path='/Account' element={<Account />} />
+      </Routes>
       </AuthContextProvider>
+      </BrowserRouter>
     </div>
   );
 }
