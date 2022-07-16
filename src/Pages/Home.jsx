@@ -7,7 +7,6 @@ import React from 'react'
 const Home = () => {
   return (
     <div>  
-
      <Banner />
     <Row title='NETFLIX ORIGINALS' fetchUrl={requests.fetchNetflixOriginals} carouselID ='1'/>
     <Row title='Trending Now' fetchUrl={requests.fetchTrending} carouselID ='2'/>
