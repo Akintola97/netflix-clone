@@ -49,26 +49,25 @@ const Titles = ({movie}) => {
       
           }       
           
-          const opts = {
-            height:"390",
-            width:"100%",
-            playerVars:{
-              autoplay: 1, 
-            }
-          };
+         const opts = {
+      height:"390",
+      width:"100%",
+      playerVars:{
+        autoplay: 1, 
+      }
+    };
 
   return (
     <div>  
-         <div className='w-[43vmin]  inline-block cursor-pointer p-2 relative'>
+         <div className='w-[43vmin] h-full inline-block cursor-pointer p-2 relative'>
             
-    <img key={movie?.id}  className='w-full h-full' 
-    src={`${image_url}${movie?.backdrop_path || movie?.poster_path}`}
-    alt={movie?.title || movie?.name ||movie?.original_name}
+    <img key={movie?.id}  className='w-full h-full block mx-2 transition hover:scale-[1.08] ' src={`${image_url}${movie?.backdrop_path || movie?.poster_path}`}
+ alt={movie?.title || movie?.name ||movie?.original_name}
  /> 
  
  <div className='absolute top-0 left-0 w-full h-full text-white hover:bg-black/80 opacity-0 hover:opacity-100 transition'> 
  
- <p onClick = {() => handleClick(movie)}  className='white-space-normal text-[1.5vmin] flex items-center w-full h-full justify-center text-center'>
+ <p onClick = {() => handleClick(movie)}  className='white-space-normal text-[1.5vmin] flex items-center w-full h-full justify-center text-center absolute top-0'>
     {movie?.title || movie?.name ||movie?.original_name}
   </p>
   <p onClick={saveTitle}>
@@ -78,9 +77,7 @@ const Titles = ({movie}) => {
     <FaRegHeart className='absolute top-4 left-4 text-gray-300'/>
     )}
   </p>
-  
    </div>
-   
     </div>
     {trailerUrl && <YouTube videoId={trailerUrl} opts = {opts} />}
     </div>
