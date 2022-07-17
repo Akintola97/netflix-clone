@@ -32,6 +32,7 @@ const Row = ({title, fetchUrl, carouselID}) => {
       slider.scrollLeft = slider.scrollLeft + 500;
     };
 
+
     
   return (
     <>
@@ -41,7 +42,7 @@ const Row = ({title, fetchUrl, carouselID}) => {
     />
       <div id = {'carousel' + carouselID} 
       className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
-      
+ 
       {movies.map((movie, id) => (
           <Titles key = {id} movie = {movie} />
       ))}
