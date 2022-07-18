@@ -77,7 +77,9 @@ const Titles = ({movie}) => {
     <FaRegHeart className='absolute top-4 left-4 text-gray-300'/>
     )}
   </p>
+  
    </div>
+   
     </div>
     {trailerUrl && <YouTube videoId={trailerUrl} opts = {opts} />}
     </div>
