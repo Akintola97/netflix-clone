@@ -5,8 +5,8 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import {arrayUnion, doc, updateDoc} from 'firebase/firestore'
 import { db } from '../firebase';
 import YouTube from 'react-youtube';
-
 import { UserAuth } from '../context/AuthContext';
+
 
 
 const image_url= "https://image.tmdb.org/t/p/original/";
@@ -14,6 +14,7 @@ const image_url= "https://image.tmdb.org/t/p/original/";
 const Titles = ({movie}) => {
     const [like, setLike] = useState(false);
     const {user} = UserAuth();
+    // eslint-disable-next-line
     const [saved, setSaved] = useState(false)
     const [trailerUrl, setTrailerUrl] =useState("");
 
@@ -36,22 +37,25 @@ const Titles = ({movie}) => {
         }
 
 
-        const handleClick = (movie) => {
+
+
+
+
+       const handleClick = (movie) => {
             if (trailerUrl){
               setTrailerUrl('');
             } else {
               movieTrailer (movie?.title || movie?.name || movie?.original_name)
               .then((url) =>{
-                const urlParams = new URLSearchParams(new URL(url).search);
+               const urlParams = new URLSearchParams(new URL(url).search);
                setTrailerUrl(urlParams.get('v'));
               }).catch((error) => console.log(error))
             }
-      
-          }       
+        }       
           
          const opts = {
       height:"390",
-      width:"100%",
+      width: "100%",
       playerVars:{
         autoplay: 1, 
       }
@@ -59,17 +63,19 @@ const Titles = ({movie}) => {
 
   return (
     <div>  
-         <div className='w-[43vmin] h-full inline-block cursor-pointer p-2 relative'>
+         <div className='w-[43vmin] h-auto inline-block cursor-pointer p-2 relative'>
             
-    <img key={movie?.id}  className='w-full h-full block mx-2 transition hover:scale-[1.08] ' src={`${image_url}${movie?.backdrop_path || movie?.poster_path}`}
+    <img key={movie?.id}  className='w-full h-auto block mx-2 transition hover:scale-[1.08] ' src={`${image_url}${movie?.backdrop_path || movie?.poster_path}`}
  alt={movie?.title || movie?.name ||movie?.original_name}
  /> 
  
  <div className='absolute top-0 left-0 w-full h-full text-white hover:bg-black/80 opacity-0 hover:opacity-100 transition'> 
  
- <p onClick = {() => handleClick(movie)}  className='white-space-normal text-[1.5vmin] flex items-center w-full h-full justify-center text-center absolute top-0'>
+ <p  onClick = {() => handleClick(movie)} className='white-space-normal text-[1.5vmin] flex items-center w-full h-full justify-center text-center absolute top-0'>
     {movie?.title || movie?.name ||movie?.original_name}
+    
   </p>
+ 
   <p onClick={saveTitle}>
     {like ? (
     <FaHeart className='absolute top-4 left-4 text-gray-300'/>
@@ -79,7 +85,7 @@ const Titles = ({movie}) => {
   </p>
   
    </div>
-   
+  
     </div>
     {trailerUrl && <YouTube videoId={trailerUrl} opts = {opts} />}
     </div>
