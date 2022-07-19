@@ -14,7 +14,6 @@ const image_url= "https://image.tmdb.org/t/p/original/";
 const Titles = ({movie}) => {
     const [like, setLike] = useState(false);
     const {user} = UserAuth();
-    // eslint-disable-next-line
     const [saved, setSaved] = useState(false)
     const [trailerUrl, setTrailerUrl] =useState("");
 

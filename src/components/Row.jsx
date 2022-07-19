@@ -41,7 +41,7 @@ const Row = ({title, fetchUrl, carouselID}) => {
     <MdChevronLeft onClick={slideLeft} className='bg-white absolute bottom-[50%] left-0 opacity-50 hover:opacity-100 group-hover:block hidden rounded-full'
     />
       <div id = {'carousel' + carouselID} 
-      className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
+      className='w-full h-full flex overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'>
  
       {movies.map((movie, id) => (
           <Titles key = {id} movie = {movie} />
